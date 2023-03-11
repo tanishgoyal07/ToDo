@@ -86,7 +86,10 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection("MyTodos").snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection("MyTodos")
+            .where('uid', isEqualTo: uid)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Text('Something went wrong');
